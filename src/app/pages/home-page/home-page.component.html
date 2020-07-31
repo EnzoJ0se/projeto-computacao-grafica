@@ -1,0 +1,196 @@
+<div class="w-full bg-blue-900">
+  <span class="text-white text-4xl ml-8 ">
+      <span class="text-red-600">R</span>
+      <span class="text-xl">adar</span>
+  </span>
+</div>
+<div class="flex h-screen w-full overflow-hidden bg-gray-300">
+    <div class="h-full bg-blue-800 min-w-0 p-5"></div>
+    <div class="w-full h-full flex px-6 pt-4">
+        <div class="w-1/2 mr-4 h-screen">
+            <div class="flex w-full  bg-white shadow-lg rounded py-8 pl-10">
+                <radar-graph [planes]="planes"></radar-graph>
+            </div>
+        </div>
+
+        <div class="w-1/2 h-screen">
+            <form class="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4" #form='ngForm'>
+                <div class="flex w-full">
+                    <div class="w-1/2">
+                        Inserir Aviões:
+                        <div class="flex">
+                            <div class="w-1/2 p-1">
+                                <input [(ngModel)]="planeToCreate.x"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="x" name="x" type="number" placeholder="x">
+                            </div>
+                            <div class="w-1/2 p-1">
+                                <input [(ngModel)]="planeToCreate.y"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="y" name="y" type="number" placeholder="y">
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="w-1/2 p-1">
+                                <input [(ngModel)]="planeToCreate.radius"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="radius" name="radius" type="number" placeholder="Raio">
+                            </div>
+                            <div class="w-1/2 p-1">
+                                <input [(ngModel)]="planeToCreate.angle"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="angle" name="angle" type="number" placeholder="Ângulo">
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="w-1/2 p-1">
+                                <input [(ngModel)]="planeToCreate.speed"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="speed" name="speed" type="number" placeholder="Velocidade">
+                            </div>
+                            <div class="w-1/2 p-1">
+                                <input [(ngModel)]="planeToCreate.direction"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="direction" name="direction" type="number" placeholder="Direção">
+                            </div>
+                        </div>
+                        <div class="flex w-full py-2">
+                            <button (click)="insertPlane()"
+                                    class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    type="button">
+                                Inserir
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="w-1/2 pl-4">
+                        Funções de Transformação
+                        <div class="w-full py-1 text-center">
+                            <div class="flex">
+                                <div class="w-1/2 px-1">
+                                    <input [(ngModel)]="translate.x"
+                                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                           id="t_x" name="t_x" type="number" placeholder="x">
+                                </div>
+                                <div class="w-1/2 px-1">
+                                    <input [(ngModel)]="translate.y"
+                                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                           id="translate_y" name="translate_y" type="number" placeholder="y">
+                                </div>
+                            </div>
+
+                            <div class="w-full mt-2 px-1">
+                                <button (click)="translateSelectedPlanes()"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        type="button">
+                                    Translandar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="w-full  mt-4 text-center">
+                            <div class="flex">
+                                <div class="w-1/2 px-1">
+                                    <input [(ngModel)]="stagger.x"
+                                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                           id="stagger_x" name="stagger_x" type="number" placeholder="x">
+                                </div>
+                                <div class="w-1/2 px-1">
+                                    <input [(ngModel)]="stagger.y"
+                                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                           id="stagger_y" name="stagger_y" type="number" placeholder="y">
+                                </div>
+                            </div>
+                            <div class="w-full mt-2 px-1">
+                                <button (click)="staggerSelectedPlanes()"
+                                        class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        type="button">
+                                    Escalonar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="w-full flex mt-4 text-center mt-6">
+                            <div class="w-1/3 px-1">
+                                Ângulo
+                            </div>
+                            <div class="w-2/3 px-1">
+                                Centro de Rotação
+                            </div>
+                        </div>
+                        <div class="w-full mt-2 flex">
+                            <div class="w-1/3 text-center ">
+                                <input [(ngModel)]="rotate.angle"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="rotate_angle" name="rotate_angle" type="number" placeholder="">
+                            </div>
+                            <div class="w-1/3 px-1">
+                                <input [(ngModel)]="rotate.x"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="rotate_x" name="rotate_x" type="number" placeholder="x">
+                            </div>
+                            <div class="w-1/3 px-1">
+                                <input [(ngModel)]="rotate.y"
+                                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                       id="rotate_y" name="rotate_y" type="number" placeholder="y">
+                            </div>
+                        </div>
+                        <div class="flex w-full mt-2">
+                            <button (click)="rotateSelectedPlanes()"
+                                    class="bg-blue-500 w-full hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    type="button">
+                                Rotacionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="w-full">
+                <form class="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4" #form='ngForm'>
+                    <table class="table table-auto table-hover border w-full">
+                        <thead>
+                            <tr class="bg-gray-300">
+                                <th class="py-2 px-2"></th>
+                                <th class="py-2">ID</th>
+                                <th class="py-2">X</th>
+                                <th class="py-2">Y</th>
+                                <th class="py-2">Raio</th>
+                                <th class="py-2">Ângulo</th>
+                                <th class="py-2">velocidade</th>
+                                <th class="py-2">Direção</th>
+                                <th class="py-2 px-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngIf="!planes.length">
+                                <tr class="text-center">
+                                    <td colspan="9">
+                                        <span>Sem Registros Informados</span>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                            <tr *ngFor="let plane of planes; let i = index" class="border">
+                                <td class="border py-2 text-center">
+                                    <input [(ngModel)]="plane.isSelected" (ngModelChange)="selectItem(plane.id, $event)"
+                                           class="px-2" type="checkbox" name="select_checkbox_{{i}}">
+                                </td>
+                                <td class="text-center border py-2">{{ plane.id }}</td>
+                                <td class="text-center border py-2">{{ plane.x | number: '1.2-2':'' }}</td>
+                                <td class="text-center border py-2">{{ plane.y | number: '1.2-2':'' }}</td>
+                                <td class="text-center border py-2">{{ plane.radius | number: '1.2-2':'' }}
+                                <td class="text-center border py-2">{{ plane.angle | number: '1.2-2':'' }}</td>
+                                <td class="text-center border py-2">{{ plane.speed }}</td>
+                                <td class="text-center border py-2">{{ plane.direction }}</td>
+                                <td class="border py-2 text-center">
+                                    <span (click)="removePlane(i)" class="text-md text-gray-600 font-semibold cursor-pointer py-1 px-3 rounded-lg hover:bg-red-500 hover:text-white">X</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
