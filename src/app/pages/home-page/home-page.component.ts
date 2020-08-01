@@ -48,7 +48,6 @@ export class HomePageComponent {
         }
 
         this.graph.refreshGraph();
-        this.rotate = new Rotate();
     }
 
     public translateSelectedPlanes() {
@@ -63,7 +62,6 @@ export class HomePageComponent {
         }
 
         this.graph.refreshGraph();
-        this.translate = new Translate();
     }
 
     public staggerSelectedPlanes() {
@@ -82,7 +80,6 @@ export class HomePageComponent {
         }
 
         this.graph.refreshGraph();
-        this.stagger = new Stagger();
     }
 
     public insertPlane() {

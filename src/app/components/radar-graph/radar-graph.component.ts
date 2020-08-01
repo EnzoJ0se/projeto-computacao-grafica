@@ -44,6 +44,8 @@ export class RadarGraphComponent implements AfterViewInit {
 
     private renderPlanes() {
         for (const plane of this.planes) {
+            this.graphContext.fillStyle = 'black';
+
             const realX = ((plane.x * this.scaleUnit) + this.xCenter);
             const realY = ((-(plane.y * this.scaleUnit)) + this.yCenter);
 
@@ -76,7 +78,6 @@ export class RadarGraphComponent implements AfterViewInit {
     }
 
     private buildGraph() {
-
         this.graphContext.moveTo(300, 0);
         this.graphContext.lineTo(300, 600);
         this.graphContext.stroke();
@@ -84,6 +85,8 @@ export class RadarGraphComponent implements AfterViewInit {
         this.graphContext.moveTo(0, 300);
         this.graphContext.lineTo(600, 300);
         this.graphContext.stroke();
+
+        this.graphContext.fillStyle = 'gray';
 
         for (let x = 0; x <= 20; x++) {
             this.graphContext.moveTo(x * 30, 300);
